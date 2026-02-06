@@ -45,7 +45,7 @@ Estrutura:
 ## 3. Estrutura artificial no contexto computacional 
 A rede neural artificial é definida aqui como um classificador de aprendizado supervisionado.
 
-![alt text](image-1.png)
+![alt text](image/image-1.png)
 
 Na imagem observa-se pontos pretos e vermelhos.
 * **Espaço de atributos:** eixo horizontal representa atributo 1 ($x_1$) e eixo vertical atributo 2 ($x_2$).
