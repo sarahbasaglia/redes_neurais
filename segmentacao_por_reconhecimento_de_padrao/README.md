@@ -54,11 +54,30 @@ Os atributos podem ser:
 
 ### 3.2) Método Fuzzy C-Means (FCM)
 É uma evolução do K-Means que utiliza a lógica difusa (Fuzzy). Enquanto no K-Means um pixel pertence obrigatoriamente a **apenas** um grupo, no FCM um pixel pode pertencer a vários grupos simultaneamente.
-#### 3.2.1) Conjunto Crisp e Fuzzy
+#### 3.2.1) Funções de pertencimento
+
+**1. Pertinência por Intensidade:**
+
+A segmentação por intensidade utiliza a distribuição estatística da Região de Interesse (ROI) selecionada manualmente. Através de uma Função de Pertinência Gaussiana, o algoritmo calcula o "grau de certeza" de que um pixel pertence ao objeto alvo. 
+
+* **Pico da Curva** ($\mu$): Definido pela intensidade média dos pixels na ROI selecionada.
+
+* **Largura da Curva** ($\sigma$): Definida pelo desvio padrão da ROI, representando a tolerância a ruídos ou variações de cor.
+
+* **Comportamento:** Se a ROI for homogênea (cor sólida), a curva torna-se estreita e seletiva; se for heterogênea, a curva achata-se, permitindo uma maior gama de tons.
+
+**2) Pertinência por Distância**
+
+Para evitar que pixels de mesma cor no fundo da imagem sejam selecionados incorretamente, o código implementa uma restrição geográfica baseada na localização da ROI. O comportamento desta função depende de dois fatores críticos da seleção:
+
+* **Localização da Semente:** Calcula-se a distância euclidiana entre o centro da imagem e o centro da ROI. O pico de pertinência (nota 1.0) estará exatamente nesta distância, criando um anel de busca preferencial.
+
+* **Tamanho da Seleção**: Utiliza-se a menor dimensão (largura ou altura) da ROI para definir o desvio padrão espacial. Isso garante que a área de influência da segmentação não se espalhe para muito longe do objeto delimitado pelo usuário.
+#### 3.2.2) Conjunto Crisp e Fuzzy
 * **Conjunto Crisp:** lógica binária. Ou um pixel "é tecido saudável" ou é "tumor". Não há meio-termo.
 * **Conjunto Fuzzy:** permite graus de pertinência (valores entre 0 e 1). Um pixel pode ter 0.8 (80%) de pertinência ao grupo "tumor" e 0.2 (20%) ao grupo "tecido saudável".
 
-## Bibliotecas
+## 4. Bibliotecas
 ### 1. Pandas
 Ferramenta importante para manipulação e análise de dados em Python. 
 #### Estruturas principais
